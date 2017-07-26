@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Upcoming Movies</string>
+    <string name="local_url">https://api.themoviedb.org/3/movie/</string>
+    <string name="live_url">https://api.themoviedb.org/3/movie/</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="check_internet">Please check internet connection</string>
+</resources>

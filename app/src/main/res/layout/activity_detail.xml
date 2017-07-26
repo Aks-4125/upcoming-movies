@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.upcoming.ui.activity.detail.DetailActivity">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="164dp"
+            android:layout_alignParentTop="true" />
+
+        <com.test.upcoming.customui.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="bottom|center"
+            android:padding="5dp"
+            app:centered="true"
+            app:fillColor="#ff0099"
+            app:snap="false" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/movieDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ratingBar"
+        android:layout_below="@+id/linearLayout"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvMovietitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            tools:text="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/myInfo"
+                android:layout_width="wrap_content"
+                android:clickable="true"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+</RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/cardview_dark_background" />
+
+        <TextView
+            android:id="@+id/tvMovieOverview"
+            android:maxLines = "10"
+            android:scrollbars = "vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:text="@string/app_name" />
+
+
+    </LinearLayout>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="0.5" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="right"
+        android:layout_marginTop="197dp"
+        android:gravity="center"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/custom_progress_blue"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+
+</RelativeLayout>

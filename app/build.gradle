@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
+    defaultConfig {
+        applicationId "com.easystay.developerandroid"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_KEY", '\"b7cd3340a794e5a2f35e3abb820b497f\"'
+            buildConfigField "String", "BASE_IMG_URL", '\"https://image.tmdb.org/t/p/\"'
+        }
+        debug {
+            buildConfigField "String", "API_KEY", '\"b7cd3340a794e5a2f35e3abb820b497f\"'
+            buildConfigField "String", "BASE_IMG_URL", '\"https://image.tmdb.org/t/p/\"'
+
+        }
+    }
+
+
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.dagger/dagger/pom.properties'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/maven/com.google.dagger/dagger/pom.xml'
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+
+
+    Map<String, String> dependencies = rootProject.ext.dependencies
+    //support
+    compile dependencies.appCompat
+    compile dependencies.recyclerView
+    compile dependencies.cardView
+    compile dependencies.designSupport
+    compile dependencies.support
+    // retrofit
+    compile dependencies.retrofit
+    compile dependencies.retrofitConverterGson
+    compile dependencies.retrofitLogging
+    compile dependencies.retrofitAdapterRxJava
+
+    // rx
+    compile dependencies.rxJava
+    compile dependencies.rxAndroid
+    compile dependencies.rxBinding
+
+    // butterknife
+    compile dependencies.butterknife
+    annotationProcessor dependencies.butterknifecompiler
+
+    //glide
+    compile dependencies.glide
+
+    // dagger
+    compile dependencies.dagger
+    annotationProcessor dependencies.daggerCompiler
+    provided dependencies.annotation
+
+    //constraintLayout
+    compile dependencies.constraintLayout
+
+    //parceler
+    compile dependencies.parcelerApi
+    annotationProcessor dependencies.parceler
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
+}

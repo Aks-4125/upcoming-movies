@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    app:cardBackgroundColor="#10000000"
+    android:id="@+id/cvMovie"
+    app:cardCornerRadius="5dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+
+
+        <ImageView
+            android:id="@+id/mMovieLogo"
+            android:layout_width="@dimen/img_idth"
+            android:layout_height="@dimen/img_height"
+            android:scaleType="fitXY"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:id="@+id/mMovieName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/mMovieLogo"
+            android:layout_toEndOf="@+id/mMovieLogo"
+            android:layout_toLeftOf="@+id/mReleaseDate"
+            android:layout_toRightOf="@+id/mMovieLogo"
+            android:textStyle="bold"
+            tools:text="Movie Name" />
+
+        <TextView
+            android:id="@+id/mReleaseDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Movie Name"
+            android:layout_below="@+id/mMovieName"
+            android:layout_toRightOf="@+id/mMovieLogo"
+            android:layout_toEndOf="@+id/mMovieLogo"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/mAdult"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mMovieLogo"
+            android:layout_toEndOf="@+id/mMovieLogo"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/mMovieLogo"
+            tools:text="18+" />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
