@@ -153,7 +153,7 @@ public class DetailActivity extends BaseActivity implements DetailContractor.IDe
 //                view.loadUrl(url);
 //
 //                return true;
-//            }
+//
 //        });
         wv.setWebChromeClient(new WebChromeClient());
         alert.setView(wv);
