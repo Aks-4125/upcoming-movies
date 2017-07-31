@@ -11,17 +11,17 @@ import java.util.ArrayList;
 public class MovieImages {
 
 
-    private Integer id;
+    private int id;
 
     private ArrayList<Backdrop> backdrops = null;
 
     private ArrayList<Poster> posters = null;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -47,15 +47,15 @@ public class MovieImages {
         @SerializedName("file_path")
         private String filePath;
         @SerializedName("height")
-        private Integer height;
+        private int height;
         @SerializedName("iso_639_1")
         private String iso6391;
         @SerializedName("vote_average")
-        private Integer voteAverage;
+        private double voteAverage;
         @SerializedName("vote_count")
-        private Integer voteCount;
+        private int voteCount;
 
-        private Integer width;
+        private int width;
 
         public Double getAspectRatio() {
             return aspectRatio;
@@ -73,11 +73,11 @@ public class MovieImages {
             this.filePath = filePath;
         }
 
-        public Integer getHeight() {
+        public int getHeight() {
             return height;
         }
 
-        public void setHeight(Integer height) {
+        public void setHeight(int height) {
             this.height = height;
         }
 
@@ -89,27 +89,27 @@ public class MovieImages {
             this.iso6391 = iso6391;
         }
 
-        public Integer getVoteAverage() {
+        public double getVoteAverage() {
             return voteAverage;
         }
 
-        public void setVoteAverage(Integer voteAverage) {
+        public void setVoteAverage(double voteAverage) {
             this.voteAverage = voteAverage;
         }
 
-        public Integer getVoteCount() {
+        public int getVoteCount() {
             return voteCount;
         }
 
-        public void setVoteCount(Integer voteCount) {
+        public void setVoteCount(int voteCount) {
             this.voteCount = voteCount;
         }
 
-        public Integer getWidth() {
+        public int getWidth() {
             return width;
         }
 
-        public void setWidth(Integer width) {
+        public void setWidth(int width) {
             this.width = width;
         }
 
@@ -121,15 +121,15 @@ public class MovieImages {
         @SerializedName("file_path")
         private String filePath;
 
-        private Integer height;
+        private int height;
         @SerializedName("iso_639_1")
         private String iso6391;
         @SerializedName("vote_average")
-        private Integer voteAverage;
+        private double voteAverage;
         @SerializedName("vote_count")
-        private Integer voteCount;
+        private int voteCount;
 
-        private Integer width;
+        private int width;
 
         public Double getAspectRatio() {
             return aspectRatio;
@@ -147,11 +147,11 @@ public class MovieImages {
             this.filePath = filePath;
         }
 
-        public Integer getHeight() {
+        public int getHeight() {
             return height;
         }
 
-        public void setHeight(Integer height) {
+        public void setHeight(int height) {
             this.height = height;
         }
 
@@ -163,27 +163,27 @@ public class MovieImages {
             this.iso6391 = iso6391;
         }
 
-        public Integer getVoteAverage() {
+        public double getVoteAverage() {
             return voteAverage;
         }
 
-        public void setVoteAverage(Integer voteAverage) {
+        public void setVoteAverage(double voteAverage) {
             this.voteAverage = voteAverage;
         }
 
-        public Integer getVoteCount() {
+        public int getVoteCount() {
             return voteCount;
         }
 
-        public void setVoteCount(Integer voteCount) {
+        public void setVoteCount(int voteCount) {
             this.voteCount = voteCount;
         }
 
-        public Integer getWidth() {
+        public int getWidth() {
             return width;
         }
 
-        public void setWidth(Integer width) {
+        public void setWidth(int width) {
             this.width = width;
         }
 

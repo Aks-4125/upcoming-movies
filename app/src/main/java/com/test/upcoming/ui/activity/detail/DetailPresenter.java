@@ -1,5 +1,6 @@
 package com.test.upcoming.ui.activity.detail;
 
+import com.test.upcoming.model.MovieImages;
 import com.test.upcoming.networkcall.WebService;
 import com.google.gson.JsonObject;
 
@@ -20,16 +21,14 @@ public class DetailPresenter implements DetailContractor.IDetailPresenter {
     private WebService webService;
     private Subscription mSubscription;
 
-    public void setDetailView(DetailContractor.IDetailView detailView) {
-        this.detailView = detailView;
-    }
-
-
     @Inject
     public DetailPresenter(WebService webService) {
         this.webService = webService;
     }
 
+    public void setDetailView(DetailContractor.IDetailView detailView) {
+        this.detailView = detailView;
+    }
 
     @Override
     public void subscribe() {
@@ -43,7 +42,7 @@ public class DetailPresenter implements DetailContractor.IDetailPresenter {
         mSubscription = webService.getMovieImages(movieID,apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<JsonObject>() {
+                .subscribe(new Subscriber<MovieImages>() {
                     @Override
                     public void onCompleted() {
 
@@ -56,7 +55,7 @@ public class DetailPresenter implements DetailContractor.IDetailPresenter {
                     }
 
                     @Override
-                    public void onNext(JsonObject jsonObject) {
+                    public void onNext(MovieImages jsonObject) {
                         detailView.stopProgress();
                         detailView.processJson(jsonObject);
                     }

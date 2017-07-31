@@ -133,8 +133,8 @@ public class DetailActivity extends BaseActivity implements DetailContractor.IDe
     }
 
     @Override
-    public void processJson(JsonObject object) {
-        MovieImages images = mGson.fromJson(object, MovieImages.class);
+    public void processJson(MovieImages images) {
+       // MovieImages images = mGson.fromJson(object, MovieImages.class);
         pager.setAdapter(new ImageAdapter(this, images.getBackdrops()));
 
         indicator.setViewPager(pager);

@@ -1,5 +1,8 @@
 package com.test.upcoming.ui.activity.main;
 
+import android.graphics.Movie;
+
+import com.test.upcoming.model.Movies;
 import com.test.upcoming.networkcall.WebService;
 import com.google.gson.JsonObject;
 
@@ -46,7 +49,7 @@ public class MainPresenter implements MainContractor.IMainPresenter {
         mSubscription = webService.getMovieList(key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<JsonObject>() {
+                .subscribe(new Subscriber<Movies>() {
                     @Override
                     public void onCompleted() {
 
@@ -59,7 +62,7 @@ public class MainPresenter implements MainContractor.IMainPresenter {
                     }
 
                     @Override
-                    public void onNext(JsonObject jsonObject) {
+                    public void onNext(Movies jsonObject) {
                         mainView.stopProgress();
                         mainView.processJson(jsonObject);
                     }

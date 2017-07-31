@@ -1,6 +1,7 @@
 package com.test.upcoming.ui.activity.main;
 
 import com.google.gson.JsonObject;
+import com.test.upcoming.model.Movies;
 
 /**
  * Created by Aks4125 on 7/11/2017.
@@ -16,7 +17,7 @@ public class MainContractor {
 
         void showMessage(String message);
 
-        void processJson(JsonObject object);
+        void processJson(Movies object);
     }
 
     interface IMainPresenter {

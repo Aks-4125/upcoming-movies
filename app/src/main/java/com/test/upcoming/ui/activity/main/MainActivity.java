@@ -98,8 +98,8 @@ public class MainActivity extends BaseActivity implements MainContractor.IMainVi
     }
 
     @Override
-    public void processJson(JsonObject object) {
-        Movies movies = mGson.fromJson(object, Movies.class);
+    public void processJson(Movies movies) {
+        //Movies movies = mGson.fromJson(object, Movies.class);
         rvMovieList.setLayoutManager(mLayoutManager);
         rvMovieList.setAdapter(new MoviesAdapter(this, movies.getResults(), mUtils, networkCheck));
 
