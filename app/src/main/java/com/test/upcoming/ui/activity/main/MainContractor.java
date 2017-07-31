@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 public class MainContractor {
 
 
-    interface IMainView {
+   public interface IMainView {
         void showProgress();
 
         void stopProgress();
