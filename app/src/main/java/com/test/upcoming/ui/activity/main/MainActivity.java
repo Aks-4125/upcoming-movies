@@ -13,12 +13,18 @@ import com.test.upcoming.BuildConfig;
 import com.test.upcoming.R;
 import com.test.upcoming.adapters.MoviesAdapter;
 import com.test.upcoming.model.Movies;
-import com.google.gson.JsonObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
 
 public class MainActivity extends BaseActivity implements MainContractor.IMainView {
 
@@ -60,14 +66,6 @@ public class MainActivity extends BaseActivity implements MainContractor.IMainVi
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        if (mainPresenter != null)
-            mainPresenter.unsubscribe();
-
-        super.onDestroy();
-    }
-
     private void loadMovies() {
         mainPresenter.getMovieList(BuildConfig.API_KEY);
     }
@@ -75,6 +73,14 @@ public class MainActivity extends BaseActivity implements MainContractor.IMainVi
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mainPresenter != null)
+            mainPresenter.unsubscribe();
+
+        super.onDestroy();
     }
 
     @Override
@@ -101,9 +107,39 @@ public class MainActivity extends BaseActivity implements MainContractor.IMainVi
     public void processJson(Movies movies) {
         //Movies movies = mGson.fromJson(object, Movies.class);
         rvMovieList.setLayoutManager(mLayoutManager);
-        rvMovieList.setAdapter(new MoviesAdapter(this, movies.getResults(), mUtils, networkCheck));
+
+        //sort by date
+        Observable.fromIterable(movies.getResults())
+                .toSortedList(
+                        (result, result2) ->
+                                new StringDateComparator()
+                                        .compare(result.getReleaseDate(), result2.getReleaseDate()))
+                .doOnSuccess(results -> {
+                            //Collections.reverse(results);
+                            rvMovieList.setAdapter(
+                                    new MoviesAdapter(MainActivity.this,
+                                            (ArrayList<Movies.Result>) results,
+                                            mUtils,
+                                            networkCheck)
+                            );
+                        }
+                )
+                .subscribe();
+
 
     }
 
+    private class StringDateComparator implements Comparator<String> {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+
+        public int compare(String lhs, String rhs) {
+            try {
+                return dateFormat.parse(lhs).compareTo(dateFormat.parse(rhs));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+    }
 
 }

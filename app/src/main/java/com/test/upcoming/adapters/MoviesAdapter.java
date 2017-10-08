@@ -62,7 +62,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieHolde
 
 
         holder.mMovieName.setText(mMovie.getTitle()); // movie name
-        holder.mReleaseDate.setText(mUtils.convertDateStringToString(mMovie.getReleaseDate(), "yyyy-dd-mm", "dd, MMM yyyy")); // movie date
+        holder.mReleaseDate.setText(mUtils.convertDateStringToString(mMovie.getReleaseDate(), "yyyy-MM-dd", "dd, MMM yyyy")); // movie date
         holder.mAdult.setText(mMovie.getAdult() ? "18+: Yes" : "18+: No"); // display 18+ if movie is adult
 
 

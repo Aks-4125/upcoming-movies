@@ -12,10 +12,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -29,6 +30,9 @@ public class ApiModule {
     public WebService apiService(Context context) {
         String mBaseUrl = context.getString(BuildConfig.DEBUG ? R.string.local_url : R.string.live_url);
 
+        int cacheSize = 5 * 1024 * 1024; // 5 MB
+        Cache cache = new Cache(context.getCacheDir(), cacheSize);
+
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
 
@@ -38,12 +42,13 @@ public class ApiModule {
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 //.addNetworkInterceptor(networkInterceptor)
+                .cache(cache)
                 .build();
 
         return new Retrofit.Builder().baseUrl(mBaseUrl)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build().create(WebService.class);
 
     }

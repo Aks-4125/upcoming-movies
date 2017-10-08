@@ -1,18 +1,13 @@
 package com.test.upcoming.ui.activity.main;
 
-import android.graphics.Movie;
-
-import com.test.upcoming.model.Movies;
 import com.test.upcoming.networkcall.WebService;
-import com.google.gson.JsonObject;
-
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by Aks4125 on 7/11/2017.
@@ -22,8 +17,9 @@ public class MainPresenter implements MainContractor.IMainPresenter {
 
     private MainContractor.IMainView mainView;
     private WebService webService;
-    private Subscription mSubscription;
+    private CompositeDisposable mDisposable;
 
+    //must inject the constructor
     @Inject
     public MainPresenter(WebService webService) {
         this.webService = webService;
@@ -36,7 +32,7 @@ public class MainPresenter implements MainContractor.IMainPresenter {
 
     @Override
     public void subscribe() {
-
+        mDisposable = new CompositeDisposable();
     }
 
 
@@ -44,41 +40,31 @@ public class MainPresenter implements MainContractor.IMainPresenter {
     public void getMovieList(String key) {
         mainView.showProgress();
         //mainView.showMessage("loading" );
-
-
-        mSubscription = webService.getMovieList(key)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Movies>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mainView.showMessage("Something went wrong");
-                        mainView.stopProgress();
-                    }
-
-                    @Override
-                    public void onNext(Movies jsonObject) {
-                        mainView.stopProgress();
-                        mainView.processJson(jsonObject);
-                    }
-                });
-
+        subscribe();
+        mDisposable.add(
+                webService.getMovieList(key)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSuccess(movies -> {
+                            mainView.stopProgress();
+                            mainView.processJson(movies);
+                            unsubscribe();
+                        })
+                        .doOnError(throwable -> {
+                            mainView.showMessage("Something went wrong");
+                            mainView.stopProgress();
+                            unsubscribe();
+                        })
+                        .subscribe()
+        );
 
     }
 
     @Override
     public void unsubscribe() {
-        if (mSubscription != null && !mSubscription.isUnsubscribed())
-            mSubscription.unsubscribe();
-
+        if (mDisposable != null && !mDisposable.isDisposed())
+            mDisposable.dispose();
         mainView.stopProgress();
-
     }
-
 
 }

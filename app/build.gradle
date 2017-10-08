@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -25,7 +26,10 @@ android {
 
         }
     }
-
+    compileOptions {
+        targetCompatibility rootProject.ext.targetCompatibility
+        sourceCompatibility rootProject.ext.sourceCompatibility
+    }
 
     packagingOptions {
         exclude 'META-INF/maven/com.google.dagger/dagger/pom.properties'
