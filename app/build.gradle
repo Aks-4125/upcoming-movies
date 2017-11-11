@@ -1,6 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -37,6 +35,7 @@ android {
         exclude 'META-INF/maven/com.google.dagger/dagger/pom.xml'
     }
 
+    buildToolsVersion '27.0.0'
 }
 
 dependencies {
@@ -46,40 +45,39 @@ dependencies {
 
     Map<String, String> dependencies = rootProject.ext.dependencies
     //support
-    compile dependencies.appCompat
-    compile dependencies.recyclerView
-    compile dependencies.cardView
-    compile dependencies.designSupport
-    compile dependencies.support
+    implementation dependencies.appCompat
+    implementation dependencies.recyclerView
+    implementation dependencies.cardView
+    implementation dependencies.designSupport
+    implementation dependencies.support
     // retrofit
-    compile dependencies.retrofit
-    compile dependencies.retrofitConverterGson
-    compile dependencies.retrofitLogging
-    compile dependencies.retrofitAdapterRxJava
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitConverterGson
+    implementation dependencies.retrofitLogging
+    implementation dependencies.retrofitAdapterRxJava
 
     // rx
-    compile dependencies.rxJava
-    compile dependencies.rxAndroid
-    compile dependencies.rxBinding
+    implementation dependencies.rxJava
+    implementation dependencies.rxAndroid
+    implementation dependencies.rxBinding
 
     // butterknife
-    compile dependencies.butterknife
+    implementation dependencies.butterknife
     annotationProcessor dependencies.butterknifecompiler
 
     //glide
-    compile dependencies.glide
+    implementation dependencies.glide
 
     // dagger
-    compile dependencies.dagger
+    implementation dependencies.dagger
     annotationProcessor dependencies.daggerCompiler
     provided dependencies.annotation
 
     //constraintLayout
-    compile dependencies.constraintLayout
+    implementation dependencies.constraintLayout
 
     //parceler
-    compile dependencies.parcelerApi
+    implementation dependencies.parcelerApi
     annotationProcessor dependencies.parceler
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
 }
